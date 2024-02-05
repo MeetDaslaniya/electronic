@@ -1,18 +1,28 @@
-import Header from './Component/Header';
-import Body from './Component/Body'
-import './App.css';
-import Footer from './Component/Footer';
-import Search from './Component/Search'
+import Header from "./Component/Header";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Footer from "./Component/Footer";
+import Search from "./Component/Search";
+import Contectus from "./Component/contect";
+import Aboutus from "./Component/Aboutus";
+import Cart from "./Component/Cart";
 
 function App() {
   return (
     <>
-    <Header/>
-    <Search/>
-    <Body/>
-    <Footer/>
+    
+      <BrowserRouter>
+      <Header/>
+        <Routes>
+          <Route path="/" element={<Search />} />
+          <Route path='/aboutus' element={<Aboutus/>}/>
+          <Route path='/contectus' element={<Contectus/>}/>
+          <Route path='/cart' element={<Cart/>}/>
+        </Routes>
+      <Footer/>
+      </BrowserRouter>
     </>
   );
-  }
+}
 
 export default App;

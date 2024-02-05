@@ -8,6 +8,7 @@ const Body = () => {
         <h1>{itm.name}</h1>
         <h1>{itm.Reating}</h1>
         <img src={itm.img}></img>
+        <button>Add to CART</button>
       </>
     );
   });
