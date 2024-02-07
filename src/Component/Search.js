@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Data } from "./Data";
 const Search = () => {
   const [input, setInput] = useState("");
-  const [noofitem,setNoofitem]=useState(0);
-  
+  const [cart,setCart]=useState([]);
+  // const getLocalCartData=()=>{
+  //   let localCartData=localStorage.getItem("cartitem");
+  //   if(localCartData=== []){
+  //     return []
+  //   }
+  //   else{
+  //     return JSON.parse(newCartData);
+  //   }
+  // }
+  useEffect(()=>{
+    localStorage.setItem("cartitem",JSON.stringify(cart))
+  },[cart])
   return (
     <>
+      <cart cart={cart}/>
       <input
         type="text"
         placeholder="Search"
@@ -25,8 +37,8 @@ const Search = () => {
             <li>{item.name}</li>
             <li>{item.Reating}</li>
             <button onClick={()=>{
-              setNoofitem(noofitem+1)
-              console.log(noofitem)
+              setCart([...cart,item.name])
+              // console.log(cart)
             }}>Quick Add</button>
           </ul>
         );
