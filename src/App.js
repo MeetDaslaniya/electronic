@@ -6,7 +6,7 @@ import Search from "./Component/Search";
 import Contectus from "./Component/contect";
 import Aboutus from "./Component/Aboutus";
 import Cart from "./Component/Cart";
-
+import Filter from "./Component/Filter";
 function App() {
   return (
     <>
@@ -16,6 +16,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Search />} />
           <Route path='/aboutus' element={<Aboutus/>}/>
+          <Route path='/filter' element={<Filter/>}/>
           <Route path='/contectus' element={<Contectus/>}/>
           <Route path='/cart' element={<Cart/>}/>
         </Routes>
