@@ -1,43 +1,49 @@
 import { useEffect, useState } from "react";
 import { Data } from "./Data";
-import { Link } from "react-router-dom";
-const Search = () => {
-  const [input, setInput] = useState("");
-  const [cart, setCart] = useState([]);
 
-  // ---------------------------------------------------------
-  const [tv, setTv] = useState(true);
-  const [watch, setWatch] = useState(true);
+const Search = () => {
+  const initial=()=>{
+    let cartdata = localStorage.getItem("cartitem")
+    cartdata=JSON.parse(cartdata)
+    const myArray = [];
+    if(cartdata === myArray){
+      return [];
+    }
+    else{
+      return cartdata;
+    }
+  }
+  const initialprice=()=>{
+    let cartprice = localStorage.getItem("totalPrice")
+    
+    // const myArray = 0;
+    if(cartprice === 0){
+      return parseInt(0);
+    }
+    else{
+      return parseInt(cartprice);
+    }
+  }
+
+  const [input, setInput] = useState("");
+  const [cart, setCart] = useState(initial);
+  const [totalPrice, setTotalPrice] = useState(initialprice);
+  
   const changehandler = (data) => {
-    // console.log(e.target.value)
     if (data === "tv") {
-      if (tv === true) {
-        // setSelected([...selected, "tv"]);
-        setInput("tv")
-      }
-      setTv(!tv);
+      setInput("TV");
     }
     if (data === "watch") {
-      if (watch === true) {
-        // setSelected([...selected, "watch"]);
-        setInput("watch")
-      }
-      setWatch(!watch);
+      setInput("Watch");
     }
-    // console.log(selected)
+    if (data === "tvandwatch") {
+      setInput("");
+    }
   };
-  // ---------------------------------------------------------
-  // const getLocalCartData=()=>{
-  //   let localCartData=localStorage.getItem("cartitem");
-  //   if(localCartData=== []){
-  //     return []
-  //   }
-  //   else{
-  //     return JSON.parse(newCartData);
-  //   }
-  // }
+
   useEffect(() => {
     localStorage.setItem("cartitem", JSON.stringify(cart));
+    localStorage.setItem("totalPrice", totalPrice);
   }, [cart]);
   return (
     <>
@@ -53,19 +59,23 @@ const Search = () => {
       />
       <div>
         <input
-          type="checkbox"
-          value={tv}
+          type="radio"
+          name="filter"
+          // value={tv}
           onChange={() => changehandler("tv")}
         />
         TV
         <input
-          type="checkbox"
-          value={watch}
+          type="radio"
+          name="filter"
+          // value={watch}
           onChange={() => changehandler("watch")}
         />
         WATCH
+        <input type="radio" name="filter" onChange={() => changehandler("tvandwatch")}/>
+        TV && WATCH
       </div>
-      {/* <Link to="/filter">Filter</Link> */}
+
       {Data.filter((item) => {
         return input.toLowerCase() === ""
           ? item
@@ -84,7 +94,10 @@ const Search = () => {
               <button
                 onClick={() => {
                   setCart([...cart, item.id]);
-                  // console.log(cart)
+                  {
+                    setTotalPrice(totalPrice + item.price);
+                  }
+                  // console.log(totalPrice);
                 }}
               >
                 Quick Add
