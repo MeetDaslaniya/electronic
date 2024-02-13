@@ -36,3 +36,12 @@
 .card{
   display: flex;
 }
+
+.maindiv {
+  display: flex;
+  justify-content: center;
+}
+
+.maindiv input{
+ margin-left: 110;
+}

@@ -13,21 +13,9 @@ const Search = () => {
       return cartdata;
     }
   }
-  const initialprice=()=>{
-    let cartprice = localStorage.getItem("totalPrice")
-    
-    // const myArray = 0;
-    if(cartprice === 0){
-      return parseInt(0);
-    }
-    else{
-      return parseInt(cartprice);
-    }
-  }
 
   const [input, setInput] = useState("");
   const [cart, setCart] = useState(initial);
-  const [totalPrice, setTotalPrice] = useState(initialprice);
   
   const changehandler = (data) => {
     if (data === "tv") {
@@ -43,7 +31,6 @@ const Search = () => {
 
   useEffect(() => {
     localStorage.setItem("cartitem", JSON.stringify(cart));
-    localStorage.setItem("totalPrice", totalPrice);
   }, [cart]);
   return (
     <>
@@ -94,10 +81,6 @@ const Search = () => {
               <button
                 onClick={() => {
                   setCart([...cart, item.id]);
-                  {
-                    setTotalPrice(totalPrice + item.price);
-                  }
-                  // console.log(totalPrice);
                 }}
               >
                 Quick Add
