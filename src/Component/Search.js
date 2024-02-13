@@ -2,6 +2,18 @@ import { useEffect, useState } from "react";
 import { Data } from "./Data";
 
 const Search = () => {
+  const initialwishlist=()=>{
+    let wishlist = localStorage.getItem("wishlist")
+    wishlist=JSON.parse(wishlist)
+    const myArray = [];
+    if(wishlist === myArray){
+      return [];
+    }
+    else{
+      return wishlist;
+    }
+  }
+
   const initial=()=>{
     let cartdata = localStorage.getItem("cartitem")
     cartdata=JSON.parse(cartdata)
@@ -16,6 +28,7 @@ const Search = () => {
 
   const [input, setInput] = useState("");
   const [cart, setCart] = useState(initial);
+  const [wishlist, setWishlist] = useState(initialwishlist);
   
   const changehandler = (data) => {
     if (data === "tv") {
@@ -32,6 +45,9 @@ const Search = () => {
   useEffect(() => {
     localStorage.setItem("cartitem", JSON.stringify(cart));
   }, [cart]);
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
   return (
     <>
       <cart cart={cart} />
@@ -83,7 +99,14 @@ const Search = () => {
                   setCart([...cart, item.id]);
                 }}
               >
-                Quick Add
+                Add to Cart
+              </button>
+              <button
+                onClick={() => {
+                  setWishlist([...wishlist, item.id]);
+                }}
+              >
+                Add to Wishlist
               </button>
             </ul>
           </div>

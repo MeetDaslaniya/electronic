@@ -8,6 +8,7 @@ import Paynow from "./Component/Paynow";
 import Aboutus from "./Component/Aboutus";
 import Cart from "./Component/Cart";
 import Filter from "./Component/Filter";
+import Wishlist from "./Component/Wishlist";
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
           <Route path='/contectus' element={<Contectus/>}/>
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/paynow' element={<Paynow/>}/>
+          <Route path='/wishlist' element={<Wishlist/>}/>
         </Routes>
       <Footer/>
       </BrowserRouter>

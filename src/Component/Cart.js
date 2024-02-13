@@ -3,26 +3,31 @@ import { Data } from "./Data";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const [qnt, setQnt] = useState(0);
+  const [qnt, setQnt] = useState(1);
   const [rerender, setRerender] = useState(0);
   let totalPrice=0
 
   let cartitem = localStorage.getItem("cartitem");
   cartitem = JSON.parse(cartitem);
+
+  function  movetowishlist(id){
+    removeitem(id-1)
+    setRerender(rerender+1)
+    let wishlist = localStorage.getItem("wishlist");
+    wishlist = JSON.parse(wishlist);
+    wishlist.push(id-1)
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }
   
   function removeitem(id) {
-    console.log("id---->56",id-1)
     let cartitem = localStorage.getItem("cartitem");
     cartitem = JSON.parse(cartitem);
-    console.log("id---->33 before",cartitem)
     let newarray=[]
     for (let i=0;i< cartitem.length;i++){
       if(cartitem[i]!=id-1){
         newarray.push(cartitem[i])
       }
     }
-    console.log("id---->89 after",newarray)
-    localStorage.clear("cartitem")
     localStorage.setItem("cartitem", JSON.stringify(newarray));
     setRerender(rerender+1)
   }
@@ -64,6 +69,11 @@ const Cart = () => {
               <li>
                 <button onClick={() => removeitem(Data[item].id)}>
                   Remove item
+                </button>
+              </li>
+              <li>
+                <button onClick={() => movetowishlist(Data[item].id)}>
+                  Move to Wishlist
                 </button>
               </li>
             </ul>
