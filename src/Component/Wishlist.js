@@ -1,7 +1,25 @@
 import { Data } from "./Data";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Wishlist = () => {
+
+  
+  const addtocart=(id)=>{
+    let wishlist = localStorage.getItem("wishlist");
+    wishlist = JSON.parse(wishlist);
+    let newarray = [];
+    for (let i = 0; i < wishlist.length; i++) {
+      if (wishlist[i] != id - 1) {
+        newarray.push(wishlist[i]);
+      }
+    }
+    localStorage.setItem("wishlist", JSON.stringify(newarray));
+    setRerender(rerender + 1);
+    let cartitem = localStorage.getItem("cartitem");
+    cartitem = JSON.parse(cartitem);
+    cartitem.push(id-1)
+    localStorage.setItem("cartitem", JSON.stringify(cartitem));
+  }
   const [rerender, setRerender] = useState(0);
 
   let wishlist = localStorage.getItem("wishlist");
@@ -37,6 +55,9 @@ const Wishlist = () => {
               <li>
                 <button onClick={() => removeitem(Data[item].id)}>
                   Remove item
+                </button>
+                <button onClick={() => addtocart(Data[item].id)}>
+                  Add to Cart
                 </button>
               </li>
             </ul>

@@ -11,8 +11,19 @@ const Cart = () => {
   cartitem = JSON.parse(cartitem);
 
   function  movetowishlist(id){
-    removeitem(id-1)
+    
+    let cartitem = localStorage.getItem("cartitem");
+    cartitem = JSON.parse(cartitem);
+    let newarray=[]
+    for (let i=0;i< cartitem.length;i++){
+      if(cartitem[i]!=id-1){
+        newarray.push(cartitem[i])
+      }
+    }
+    localStorage.setItem("cartitem", JSON.stringify(newarray));
     setRerender(rerender+1)
+
+    
     let wishlist = localStorage.getItem("wishlist");
     wishlist = JSON.parse(wishlist);
     wishlist.push(id-1)
