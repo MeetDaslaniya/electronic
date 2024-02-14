@@ -11,6 +11,7 @@ import Aboutus from "./Component/Aboutus";
 import Cart from "./Component/Cart";
 import Filter from "./Component/Filter";
 import Wishlist from "./Component/Wishlist";
+import Product from "./Component/Product";
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route path='/cart' element={<Cart/>}/>
           <Route path='/paynow' element={<Paynow/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
+          <Route path='/product/:id' element={<Product/>}/>
         </Routes>
       <Footer/>
       </BrowserRouter>

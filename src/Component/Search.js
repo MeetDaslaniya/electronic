@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Data } from "./Data";
+import { Link } from "react-router-dom";
 
 const Search = () => {
 
@@ -147,7 +148,7 @@ const Search = () => {
                 <img src={item.img} />
               </li>
               <li>{item.id}</li>
-              <li>{item.name}</li>
+              <li><Link to={`/product/${item.id}`}>{item.name}</Link></li>
               <li>{item.Reating}</li>
               <li>{item.price}</li>
               <button
