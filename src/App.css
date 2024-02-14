@@ -34,7 +34,7 @@
   grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
 } */
 .card{
-  display: flex;
+  display: inline-block;
 }
 
 .maindiv {

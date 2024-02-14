@@ -16,7 +16,7 @@ const Cart = () => {
     cartitem = JSON.parse(cartitem);
     let newarray=[]
     for (let i=0;i< cartitem.length;i++){
-      if(cartitem[i]!=id-1){
+      if(cartitem[i]!=id){
         newarray.push(cartitem[i])
       }
     }
@@ -26,7 +26,7 @@ const Cart = () => {
     
     let wishlist = localStorage.getItem("wishlist");
     wishlist = JSON.parse(wishlist);
-    wishlist.push(id-1)
+    wishlist.push(id)
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }
   
@@ -35,7 +35,7 @@ const Cart = () => {
     cartitem = JSON.parse(cartitem);
     let newarray=[]
     for (let i=0;i< cartitem.length;i++){
-      if(cartitem[i]!=id-1){
+      if(cartitem[i]!=id){
         newarray.push(cartitem[i])
       }
     }
@@ -44,17 +44,18 @@ const Cart = () => {
   }
 
   return (
-    <div className="header">
+    
+    <div className="card">
       <h1>Cart</h1>
       {cartitem.map((item) => {
         totalPrice=totalPrice+Data[item - 1].price
         return (
           <div className="card">
-            <ul className="productbox" key={Data[item].id}>
+            <ul className="productbox" key={Data[item-1].id}>
               <li>
                 <img src={Data[item - 1].img} alt="img" />
               </li>
-              {/* <li>{Data[item].id}</li> */}
+              <li>{Data[item-1].id}</li>
               <li>{Data[item - 1].name}</li>
               <li>{Data[item - 1].Reating}</li>
               <li>{Data[item - 1].price}</li>
@@ -78,12 +79,12 @@ const Cart = () => {
                 </button>
               </li>
               <li>
-                <button onClick={() => removeitem(Data[item].id)}>
+                <button onClick={() => removeitem(Data[item-1].id)}>
                   Remove item
                 </button>
               </li>
               <li>
-                <button onClick={() => movetowishlist(Data[item].id)}>
+                <button onClick={() => movetowishlist(Data[item-1].id)}>
                   Move to Wishlist
                 </button>
               </li>
